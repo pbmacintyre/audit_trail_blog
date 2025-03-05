@@ -9,9 +9,9 @@ require_once('includes/ringcentral-functions.inc');
 require_once('includes/ringcentral-db-functions.inc');
 require_once('includes/ringcentral-php-functions.inc');
 
-//show_errors();
+show_errors();
 
-page_header(1);  // set back to 1 when recaptchas are set in the .ENV file
+page_header();  // set back to 1 when recaptchas are set in the .ENV file
 
 function show_form($message, $label = "", $print_again = false) { ?>
 
