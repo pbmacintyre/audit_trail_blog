@@ -98,11 +98,7 @@ function password_check($password) {
     // Return pass / fail
     return $pass;
 }
-function generate_form_token () {
-    $token = sha1(uniqid(rand(), true));
-    $_SESSION['form_token'] = $token ;
-    return $token ;
-}
+
 function dump_log ($filename) {
 // Check if the file exists
     if (file_exists($filename)) {

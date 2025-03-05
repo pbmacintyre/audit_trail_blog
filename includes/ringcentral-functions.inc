@@ -14,12 +14,11 @@ function prod_test() {
 }
 
 function app_name() {
-	echo "Audit Trail Notifications App";
-	return "Audit Trail Notifications App";
+	return "Audit Trail Events list App";
 }
 
 function app_version() {
-	echo_plain_text("Version 0.2", "grey", "small");
+	echo_plain_text("Version 0.1", "grey", "small");
 }
 
 /* =================== */
