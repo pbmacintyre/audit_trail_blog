@@ -54,63 +54,20 @@ function echo_plain_text($text, $color="black", $font_size="large", $lines=0) {
         }
     }
 }
-function required_field() {
-    echo "<p style='color: red; display: inline'>*</p>" ;
-}
-function getCiphers() {
-    $table = "ringcentral_control";
-    $columns_data = array ("cipher_key") ;
-    $where_info = array ("ringcentral_control_id", 1);
-    $db_result = db_record_select($table, $columns_data, $where_info );
 
-    $ciphers[0] = $db_result[0]['cipher_key'];
-    $ciphers[1] = "7uV*nlhApRIsOse@";
-    return $ciphers ;
-}
-function encryptData($data) {
-    $ciphers = getCiphers() ;
-    return openssl_encrypt($data, 'AES-256-CBC', $ciphers[0], 0, $ciphers[1]);
-}
-function decryptData($encryptedData) {
-    $ciphers = getCiphers() ;
-    return openssl_decrypt($encryptedData, 'AES-256-CBC', $ciphers[0], 0, $ciphers[1]);
-}
-function password_check($password) {
-    // Initialize variables
-    $pass = false;
-
-    // Check password length
-    if (strlen($password) >= 8) {
-        $pass = true;
-    }
-    // Check for mixed case
-    if (preg_match("/[a-z]/", $password) && preg_match("/[A-Z]/", $password)) {
-        $pass = true;
-    }
-    // Check for numbers
-    if (preg_match("/\d/", $password)) {
-        $pass = true;
-    }
-    // Check for special characters
-    if (preg_match("/[^a-zA-Z\d]/", $password)) {
-        $pass = true;
-    }
-    // Return pass / fail
-    return $pass;
+function app_name() {
+	return "Audit Trail Events list App";
 }
 
-function dump_log ($filename) {
-// Check if the file exists
-    if (file_exists($filename)) {
-        // Read the contents of the file
-        $logContent = file_get_contents($filename);
-
-        // Display the contents in the browser
-        echo '<pre>' . htmlspecialchars($logContent) . '</pre>';
-    } else {
-        echo 'Error: that file does not exist.';
-    }
-
+function app_version() {
+	echo_plain_text("Version 0.1", "grey", "small");
 }
+function ringcentral_build_recaptcha_v3_top() {
 
+	require(__DIR__ . '/vendor/autoload.php');
+	$dotenv = Dotenv\Dotenv::createImmutable('includes')->load();
 
+	$site_key = $_ENV['GRC_SITE_KEY'];
+
+	echo "<script src='https://www.google.com/recaptcha/api.js?render=$site_key'></script>";
+}
