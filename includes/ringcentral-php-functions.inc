@@ -25,8 +25,10 @@ function show_errors() {
      error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
     ini_set('display_errors', 1);
 }
-function echo_spaces($text, $value="", $lines=0) {
-    echo "<br /><strong><p style='color: red; display: inline'>$text:</p></strong> " ;
+function echo_spaces($text="", $value="", $lines=0) {
+    if ($text) {
+		echo "<br /><strong><p style='color: red; display: inline'>$text: </p></strong> ";
+	}
     if (is_string($value) || is_int($value))  { echo $value; }
     if (is_object($value) || is_array($value)) { ringcentral_dump_obj($value); }
     if (is_bool($value)) { if ($value) echo "TRUE / Success"; else echo 'FALSE / Failure'; }

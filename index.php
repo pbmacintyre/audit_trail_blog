@@ -29,8 +29,9 @@ function show_form($message, $label = "", $print_again = false) { ?>
                 </td>
             </tr>
             <tr class="CustomTable">
-                <td class="CustomTableFullCol">
-                    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+                <td colspan="2" class="CustomTableFullCol">
+                    <label for="daysPast">How many days in the past to do want to look into the audit trail:</label>
+                    <input type="number" id="daysPast" name="daysPast" min="1" max="100" step="1" value="10">
                 </td>
             </tr>
             <tr class="CustomTable">
@@ -56,8 +57,8 @@ function show_form($message, $label = "", $print_again = false) { ?>
 /* ============= */
 /*  --- MAIN --- */
 /* ============= */
-if (isset($_POST['list_events'])) {
-	header("Location: list_events.php");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	header("Location: list_events.php?daysPast=$_POST[daysPast]");
 } else {
 	$message = "Please click the button to generate a list of events.";
 	show_form($message);
